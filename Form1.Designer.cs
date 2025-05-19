@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.txtTime = new System.Windows.Forms.TextBox();
@@ -40,6 +41,8 @@
             this.cmbHour = new System.Windows.Forms.ComboBox();
             this.cmbMin = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
+            this.timerClcok = new System.Windows.Forms.Timer(this.components);
+            this.timerAlert = new System.Windows.Forms.Timer(this.components);
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.SuspendLayout();
@@ -77,11 +80,12 @@
             // 
             // txtTime
             // 
-            this.txtTime.Font = new System.Drawing.Font("微軟正黑體", 64.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.txtTime.Font = new System.Drawing.Font("微軟正黑體", 63F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.txtTime.ForeColor = System.Drawing.SystemColors.WindowFrame;
             this.txtTime.Location = new System.Drawing.Point(0, 0);
             this.txtTime.Multiline = true;
             this.txtTime.Name = "txtTime";
-            this.txtTime.Size = new System.Drawing.Size(768, 134);
+            this.txtTime.Size = new System.Drawing.Size(768, 142);
             this.txtTime.TabIndex = 0;
             this.txtTime.Text = "123";
             this.txtTime.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
@@ -109,22 +113,24 @@
             // 
             // txtDate
             // 
-            this.txtDate.Font = new System.Drawing.Font("微軟正黑體", 45F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.txtDate.Location = new System.Drawing.Point(0, 134);
+            this.txtDate.Font = new System.Drawing.Font("微軟正黑體", 40.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.txtDate.ForeColor = System.Drawing.SystemColors.WindowFrame;
+            this.txtDate.Location = new System.Drawing.Point(0, 143);
             this.txtDate.Multiline = true;
             this.txtDate.Name = "txtDate";
-            this.txtDate.Size = new System.Drawing.Size(473, 102);
+            this.txtDate.Size = new System.Drawing.Size(473, 96);
             this.txtDate.TabIndex = 1;
             this.txtDate.Text = "123";
             this.txtDate.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // txtWeekDay
             // 
-            this.txtWeekDay.Font = new System.Drawing.Font("微軟正黑體", 45F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.txtWeekDay.Location = new System.Drawing.Point(471, 134);
+            this.txtWeekDay.Font = new System.Drawing.Font("微軟正黑體", 40.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.txtWeekDay.ForeColor = System.Drawing.SystemColors.WindowFrame;
+            this.txtWeekDay.Location = new System.Drawing.Point(471, 143);
             this.txtWeekDay.Multiline = true;
             this.txtWeekDay.Name = "txtWeekDay";
-            this.txtWeekDay.Size = new System.Drawing.Size(297, 102);
+            this.txtWeekDay.Size = new System.Drawing.Size(297, 96);
             this.txtWeekDay.TabIndex = 2;
             this.txtWeekDay.Text = "123";
             this.txtWeekDay.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
@@ -173,6 +179,10 @@
             this.label1.TabIndex = 7;
             this.label1.Text = "：";
             // 
+            // timerClcok
+            // 
+            this.timerClcok.Tick += new System.EventHandler(this.timerClcok_Tick);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
@@ -202,6 +212,8 @@
         private System.Windows.Forms.ComboBox cmbMin;
         private System.Windows.Forms.ComboBox cmbHour;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Timer timerClcok;
+        private System.Windows.Forms.Timer timerAlert;
     }
 }
 
