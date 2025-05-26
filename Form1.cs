@@ -15,7 +15,7 @@ using System.Diagnostics; // 引用「系統診斷」的函式庫
 
 namespace SimpleClock
 {
-    public partial class Form1: Form
+    public partial class Form1 : Form
     {
         public Form1()
         {
@@ -34,13 +34,24 @@ namespace SimpleClock
         {
             // 設定小時下拉選單的選單內容，建立小時的清單，數字範圍為00-23
             for (int i = 0; i <= 23; i++)
+            {
                 cmbHour.Items.Add(string.Format("{0:00}", i));
-            cmbHour.SelectedIndex = 0;
+                cmbCountHour.Items.Add(string.Format("{0:00}", i));
+            }
 
             // 設定分鐘下拉選單的選單內容，建立分鐘的清單，數字範圍為00-59
             for (int i = 0; i <= 59; i++)
+            {
                 cmbMin.Items.Add(string.Format("{0:00}", i));
+                cmbCountMin.Items.Add(string.Format("{0:00}", i));
+                cmbCountSecond.Items.Add(string.Format("{0:00}", i));
+            }
+
+            cmbHour.SelectedIndex = 0;
             cmbMin.SelectedIndex = 0;
+            cmbCountHour.SelectedIndex = 0;
+            cmbCountMin.SelectedIndex = 0;
+            cmbCountSecond.SelectedIndex = 0;
         }
 
         private void timerClcok_Tick(object sender, EventArgs e)
@@ -185,6 +196,79 @@ namespace SimpleClock
             {
                 listStopWatchLog.Items.Add(String.Format("第 {0} 筆紀錄：{1}", i.ToString(), StopWatchLog[i - 1] + "\n"));
                 i--;
+            }
+        }
+
+
+        bool isCountDownReset = true;                           // 用來紀錄是不是重新設定
+        TimeSpan ts;
+
+        // timerCountDown_tick：每一秒執行一次
+        private void btnCountStart_Click(object sender, EventArgs e)
+        {
+            // 進行判斷，判斷是不是有按過停止計時器按鍵
+            if (isCountDownReset == true)
+            {
+                int Hour = int.Parse(cmbCountHour.SelectedItem.ToString());
+                int Min = int.Parse(cmbCountMin.SelectedItem.ToString());
+                int Sec = int.Parse(cmbCountSecond.SelectedItem.ToString());
+                ts = new TimeSpan(Hour, Min, Sec); // 設定倒數時間
+            }
+            isCountDownReset = false;
+            timerCountDown.Start();
+        }
+
+        // 暫停倒數計時器按鍵
+        private void btnCountPause_Click(object sender, EventArgs e)
+        {
+            timerCountDown.Stop();
+        }
+
+        // 停止計時器按鍵
+        private void btnCountStop_Click(object sender, EventArgs e)
+        {
+            stopWaveOut(); // 關閉鬧鐘聲音
+            isCountDownReset = true;
+            timerCountDown.Stop();
+            txtCountDown.Text = "00:00:00";
+            cmbCountHour.SelectedIndex = 0;
+            cmbCountMin.SelectedIndex = 0;
+            cmbCountSecond.SelectedIndex = 0;
+        }
+
+        // timerCountDown_tick：每一秒執行一次
+        private void timerCountDown_Tick(object sender, EventArgs e)
+        {
+            txtCountDown.Text = ts.ToString("hh':'mm':'ss");    // 顯示時間
+            ts = ts.Subtract(TimeSpan.FromSeconds(1));          // 每一秒鐘將顯示時間減掉一秒
+
+            if (txtCountDown.Text == "00:00:00")
+            {
+                try
+                {
+                    stopWaveOut();
+
+                    // 指定聲音檔的相對路徑，可以使用MP3
+                    string audioFilePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Resources", "alert.wav");
+
+                    // 使用 AudioFileReader 來讀取聲音檔
+                    audioFileReader = new AudioFileReader(audioFilePath);
+
+                    // 初始化 WaveOutEvent
+                    waveOut = new WaveOutEvent();
+                    waveOut.Init(audioFileReader);
+
+                    // 播放聲音檔
+                    waveOut.Play();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("無法播放聲音檔，錯誤資訊: " + ex.Message);
+                }
+                finally
+                {
+                    timerCountDown.Stop();         // 停止鬧鐘計時器
+                }
             }
         }
     }
