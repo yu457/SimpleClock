@@ -45,7 +45,7 @@
             this.btnReset = new System.Windows.Forms.Button();
             this.btnPause = new System.Windows.Forms.Button();
             this.btnStart = new System.Windows.Forms.Button();
-            this.listBox1 = new System.Windows.Forms.ListBox();
+            this.listStopWatchLog = new System.Windows.Forms.ListBox();
             this.txtStopWatch = new System.Windows.Forms.TextBox();
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.timerClcok = new System.Windows.Forms.Timer(this.components);
@@ -176,7 +176,7 @@
             this.tabPage2.Controls.Add(this.btnReset);
             this.tabPage2.Controls.Add(this.btnPause);
             this.tabPage2.Controls.Add(this.btnStart);
-            this.tabPage2.Controls.Add(this.listBox1);
+            this.tabPage2.Controls.Add(this.listStopWatchLog);
             this.tabPage2.Controls.Add(this.txtStopWatch);
             this.tabPage2.Font = new System.Drawing.Font("微軟正黑體", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.tabPage2.Location = new System.Drawing.Point(4, 32);
@@ -189,12 +189,13 @@
             // 
             // btnStop
             // 
+            this.btnStop.BackColor = System.Drawing.Color.OrangeRed;
             this.btnStop.Location = new System.Drawing.Point(397, 228);
             this.btnStop.Name = "btnStop";
             this.btnStop.Size = new System.Drawing.Size(310, 46);
             this.btnStop.TabIndex = 6;
             this.btnStop.Text = "停止並歸零";
-            this.btnStop.UseVisualStyleBackColor = true;
+            this.btnStop.UseVisualStyleBackColor = false;
             this.btnStop.Click += new System.EventHandler(this.btnStop_Click);
             // 
             // btnLog
@@ -219,12 +220,13 @@
             // 
             // btnPause
             // 
+            this.btnPause.BackColor = System.Drawing.Color.Gold;
             this.btnPause.Location = new System.Drawing.Point(555, 124);
             this.btnPause.Name = "btnPause";
             this.btnPause.Size = new System.Drawing.Size(152, 46);
             this.btnPause.TabIndex = 3;
             this.btnPause.Text = "暫停";
-            this.btnPause.UseVisualStyleBackColor = true;
+            this.btnPause.UseVisualStyleBackColor = false;
             this.btnPause.Click += new System.EventHandler(this.btnPause_Click);
             // 
             // btnStart
@@ -237,18 +239,19 @@
             this.btnStart.UseVisualStyleBackColor = true;
             this.btnStart.Click += new System.EventHandler(this.btnStart_Click);
             // 
-            // listBox1
+            // listStopWatchLog
             // 
-            this.listBox1.FormattingEnabled = true;
-            this.listBox1.ItemHeight = 22;
-            this.listBox1.Location = new System.Drawing.Point(0, 122);
-            this.listBox1.Name = "listBox1";
-            this.listBox1.Size = new System.Drawing.Size(360, 268);
-            this.listBox1.TabIndex = 1;
+            this.listStopWatchLog.FormattingEnabled = true;
+            this.listStopWatchLog.ItemHeight = 22;
+            this.listStopWatchLog.Location = new System.Drawing.Point(0, 122);
+            this.listStopWatchLog.Name = "listStopWatchLog";
+            this.listStopWatchLog.Size = new System.Drawing.Size(360, 268);
+            this.listStopWatchLog.TabIndex = 1;
             // 
             // txtStopWatch
             // 
-            this.txtStopWatch.Font = new System.Drawing.Font("微軟正黑體", 48F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.txtStopWatch.Font = new System.Drawing.Font("微軟正黑體", 49.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.txtStopWatch.ForeColor = System.Drawing.SystemColors.WindowFrame;
             this.txtStopWatch.Location = new System.Drawing.Point(0, 0);
             this.txtStopWatch.Multiline = true;
             this.txtStopWatch.Name = "txtStopWatch";
@@ -314,7 +317,7 @@
         private System.Windows.Forms.Timer timerClcok;
         private System.Windows.Forms.Timer timerAlert;
         private System.Windows.Forms.Button btnStart;
-        private System.Windows.Forms.ListBox listBox1;
+        private System.Windows.Forms.ListBox listStopWatchLog;
         private System.Windows.Forms.TextBox txtStopWatch;
         private System.Windows.Forms.Button btnStop;
         private System.Windows.Forms.Button btnLog;
